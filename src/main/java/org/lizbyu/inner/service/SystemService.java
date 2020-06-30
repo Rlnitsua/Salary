@@ -1,8 +1,11 @@
 package org.lizbyu.inner.service;
 
+import org.lizbyu.inner.utils.LogUtils;
+
 import java.lang.reflect.Constructor;
 
 public class SystemService {
+    private static final String TAG = "SystemService";
     private static SystemService instance;
 
     private SystemService() {}
@@ -18,8 +21,14 @@ public class SystemService {
         return instance;
     }
 
-    public Manager getManager(Class<? extends Manager> managerClazz) throws Exception {
-        Constructor<? extends Manager> declaredConstructor = managerClazz.getDeclaredConstructor();
-        return declaredConstructor.newInstance();
+    public Manager getManager(Class<? extends Manager> managerClazz) {
+        Constructor<? extends Manager> declaredConstructor;
+        try {
+            declaredConstructor = managerClazz.getDeclaredConstructor();
+            return declaredConstructor.newInstance();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "get " + managerClazz + " error : " + e.getMessage());
+            return null;
+        }
     }
 }

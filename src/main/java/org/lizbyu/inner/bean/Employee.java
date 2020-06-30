@@ -4,31 +4,40 @@ public class Employee {
     /**
      * The unique id of employee. It'll not change and repeat.
      */
-    public long employeeID;
+    public long employeeID = -1;
+
+    public enum Type {
+        DEFAULT, HOURLY, COMMISSIONED, SALARIED
+    }
 
     /**
-     * Hourly type : 0
-     * Commissioned : 1
-     * Salaried : 2
+     * type of employee
      */
-    public int employeeType;
+    public Type employeeType = Type.DEFAULT;
+
+    public enum WorkingState {
+        NOT_EMPLOYED, WORKING, ON_LEAVE
+    }
 
     /**
-     * not employed or resigned : -1
-     * working : 0
-     * on leave : 1
+     * working state of employee
      */
-    public int workingState;
+    public WorkingState workingState = WorkingState.NOT_EMPLOYED;
+
+    /**
+     * salary of employee
+     */
+    public double salary = 0;
 
     /**
      * timestamp of entry. Salary starts from this date.
      */
-    public long entryTime;
+    public long entryTime = 0;
 
     /**
      * timestamp of leaving. Salary will stop from this date.
      */
-    public long leaveTime;
+    public long leaveTime = 0;
 
     /**
      * address of employee
@@ -43,20 +52,28 @@ public class Employee {
         this.employeeID = employeeID;
     }
 
-    public int getEmployeeType() {
+    public Type getEmployeeType() {
         return employeeType;
     }
 
-    public void setEmployeeType(int employeeType) {
+    public void setEmployeeType(Type employeeType) {
         this.employeeType = employeeType;
     }
 
-    public int getWorkingState() {
+    public WorkingState getWorkingState() {
         return workingState;
     }
 
-    public void setWorkingState(int workingState) {
+    public void setWorkingState(WorkingState workingState) {
         this.workingState = workingState;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public long getEntryTime() {
@@ -89,6 +106,7 @@ public class Employee {
                 "employeeID=" + employeeID +
                 ", employeeType=" + employeeType +
                 ", workingState=" + workingState +
+                ", salary=" + salary +
                 ", entryTime=" + entryTime +
                 ", leaveTime=" + leaveTime +
                 ", address='" + address + '\'' +
